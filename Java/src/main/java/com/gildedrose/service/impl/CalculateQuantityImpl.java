@@ -52,7 +52,8 @@ public class CalculateQuantityImpl implements CalculateQuantity {
 		}
 	}
 
-	private void itemSellInLessThanGivenDaysAndQuantityLess50(Item item, int givenDays) {
+	@Override
+	public void itemSellInLessThanGivenDaysAndQuantityLess50(Item item, int givenDays) {
 		if (itemSellin.isItemSellInLessThanGivenNumber(item, givenDays) && itemQuantity.hasQuantityLessThan50(item)) {
 
 			itemQuantity.increaseQuantity(item);

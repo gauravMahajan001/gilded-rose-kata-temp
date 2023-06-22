@@ -9,4 +9,6 @@ public interface CalculateQuantity {
 	public void itemNameNotMatchThanDecreaseQuantity(Item item, String givenItemName, String itemName);
 	
 	public void quantityPositiveAndItemNameNotMatchDecreaseQuantity(Item item, String name);
+	
+	public void itemSellInLessThanGivenDaysAndQuantityLess50(Item item, int givenDays);
 }
