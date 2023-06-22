@@ -21,7 +21,7 @@ public class TexttestFixture {
                 };
 
         GildedRose app = new GildedRose(items);
-
+        GildedRoseTemp app1 = new GildedRoseTemp(items);
         int days = 2;
         if (args.length > 0) {
             days = Integer.parseInt(args[0]) + 1;
@@ -34,7 +34,7 @@ public class TexttestFixture {
                 System.out.println(item);
             }
             System.out.println();
-            app.updateQuality();
+            app1.updateQuality();
         }
     }
 
