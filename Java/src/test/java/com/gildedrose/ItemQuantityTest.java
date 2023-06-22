@@ -41,6 +41,5 @@ class ItemQuantityTest {
 		
 		itemQuantity.decreaseQuantity(item);
 		assertEquals(expectedQuantity, item.quality);
-		
 	}
 }
