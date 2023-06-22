@@ -60,4 +60,15 @@ class ItemQuantityTest {
 		Boolean result = itemQuantity.hasQuantityLessThan50(item);
 		 assertEquals(Boolean.FALSE, result);
 	}
+	
+	@Test
+	void testOuantityIncrease() {
+		
+		Item item = new Item("Test", 2, 10);
+		int expectedQuantity = 11;
+		itemQuantity.increaseQuantity(item);
+		
+		assertEquals(expectedQuantity, item.quality);
+		
+	}
 }
