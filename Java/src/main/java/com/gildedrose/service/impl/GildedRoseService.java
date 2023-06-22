@@ -1,19 +1,25 @@
 package com.gildedrose.service.impl;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 import com.gildedrose.constant.ApplicationConstant;
 import com.gildedrose.model.Item;
+import com.gildedrose.service.CalculateQuantity;
+import com.gildedrose.service.CalculateSellin;
 import com.gildedrose.service.ItemSellin;
+import com.gildedrose.service.ItemSpecificName;
 
 public class GildedRoseService {
-	
+
 	private Item[] items;
 	private ItemSellin itemSellin;
-	private ItemSpecificNameImpl itemSpecificName;
-	private CalculateQuantityImpl calculateQuantity;
-	private CalculateSellinImpl calculateSellin;
+	private ItemSpecificName itemSpecificName;
+	private CalculateQuantity calculateQuantity;
+	private CalculateSellin calculateSellin;
 
-	public GildedRoseService(Item[] items, ItemSellin itemSellin, ItemSpecificNameImpl itemSpecificName,
-			CalculateQuantityImpl calculateQuantity, CalculateSellinImpl calculateSellin) {
+	public GildedRoseService(Item[] items, ItemSellin itemSellin, ItemSpecificName itemSpecificName,
+			CalculateQuantity calculateQuantity, CalculateSellin calculateSellin) {
 		this.items = items;
 		this.itemSellin = itemSellin;
 		this.itemSpecificName = itemSpecificName;
@@ -22,24 +28,30 @@ public class GildedRoseService {
 	}
 
 	public void updateQuality() {
-		for (int i = 0; i < items.length; i++) {
+		int compareNumber = 11;
+		int compareVal = 7;
 
-			if (itemSpecificName.isSpecficItemNamesNotMatch(items[i])) {
+		Arrays.stream(items).forEach(item -> {
 
-				calculateQuantity.quantityPositiveAndItemNameNotMatchDecreaseQuantity(items[i],
+			if (itemSpecificName.isSpecficItemNamesNotMatch(item, ApplicationConstant.ITEM_NAME_STR,
+					ApplicationConstant.ITEM_NAME_VAL)) {
+
+				calculateQuantity.quantityPositiveAndItemNameNotMatchDecreaseQuantity(item,
 						ApplicationConstant.ITEM_NAME);
 			} else {
 
-				calculateQuantity.itemQuantityLess50(items[i]);
+				calculateQuantity.itemQuantityLess50(item, ApplicationConstant.ITEM_NAME_VAL, compareNumber,
+						compareVal);
 			}
 
-			if (itemSpecificName.isSpecficItemNameNotMatchWithGivenName(items[i], ApplicationConstant.ITEM_NAME)) {
+			if (itemSpecificName.isSpecficItemNameNotMatchWithGivenName(item, ApplicationConstant.ITEM_NAME)) {
 
-				itemSellin.decreaseSellin(items[i]);
+				itemSellin.decreaseSellin(item);
 			}
 
-			calculateSellin.itemSellinLessThanZero(items[i]);
-		}
+			calculateSellin.itemSellinLessThanZero(item, ApplicationConstant.ITEM_NAME_STR,
+					ApplicationConstant.ITEM_NAME_VAL, ApplicationConstant.ITEM_NAME);
+		});
 	}
 
 }

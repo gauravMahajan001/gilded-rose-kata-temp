@@ -1,20 +1,21 @@
 package com.gildedrose.service.impl;
 
-import com.gildedrose.constant.ApplicationConstant;
 import com.gildedrose.model.Item;
+import com.gildedrose.service.CalculateQuantity;
 import com.gildedrose.service.CalculateSellin;
 import com.gildedrose.service.ItemQuantity;
 import com.gildedrose.service.ItemSellin;
+import com.gildedrose.service.ItemSpecificName;
 
 public class CalculateSellinImpl implements CalculateSellin {
 
 	private ItemSellin itemSellin;
-	private ItemSpecificNameImpl itemSpecificName;
+	private ItemSpecificName itemSpecificName;
 	private ItemQuantity itemQuantity;
-	private CalculateQuantityImpl calculateQuantity;
+	private CalculateQuantity calculateQuantity;
 
-	public CalculateSellinImpl(ItemSellin itemSellin, ItemSpecificNameImpl itemSpecificName, ItemQuantity itemQuantity,
-			CalculateQuantityImpl calculateQuantity) {
+	public CalculateSellinImpl(ItemSellin itemSellin, ItemSpecificName itemSpecificName, ItemQuantity itemQuantity,
+			CalculateQuantity calculateQuantity) {
 		this.itemSellin = itemSellin;
 		this.itemSpecificName = itemSpecificName;
 		this.itemQuantity = itemQuantity;
@@ -23,17 +24,16 @@ public class CalculateSellinImpl implements CalculateSellin {
 	}
 
 	@Override
-	public void itemSellinLessThanZero(Item item) {
+	public void itemSellinLessThanZero(Item item, String givenItemName, String itemName, String itemNameVal) {
 
 		if (itemSellin.hasItemSellinNegative(item)) {
 
-			if (itemSpecificName.isSpecficItemNameNotMatchWithGivenName(item, ApplicationConstant.ITEM_NAME_STR)) {
+			if (itemSpecificName.isSpecficItemNameNotMatchWithGivenName(item, givenItemName)) {
 
-				calculateQuantity.itemNameNotMatchThanDecreaseQuantity(item);
+				calculateQuantity.itemNameNotMatchThanDecreaseQuantity(item, itemName, itemNameVal);
 			} else {
 				itemQuantity.quantityLessThan50IncreaseQuantity(item);
 			}
 		}
 	}
-
 }

@@ -4,6 +4,6 @@ import com.gildedrose.model.Item;
 
 public interface CalculateSellin {
 	
-	public void itemSellinLessThanZero(Item item);
+	public void itemSellinLessThanZero(Item item, String givenItemName, String itemName, String itemNameVal);
 
 }

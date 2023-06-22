@@ -1,53 +1,53 @@
 package com.gildedrose.service.impl;
 
-import com.gildedrose.constant.ApplicationConstant;
 import com.gildedrose.model.Item;
 import com.gildedrose.service.CalculateQuantity;
 import com.gildedrose.service.ItemQuantity;
 import com.gildedrose.service.ItemSellin;
+import com.gildedrose.service.ItemSpecificName;
 
 public class CalculateQuantityImpl implements CalculateQuantity {
 
 	private ItemSellin itemSellin;
-	private ItemSpecificNameImpl itemSpecificName;
+	private ItemSpecificName itemSpecificName;
 	private ItemQuantity itemQuantity;
-	
-	public CalculateQuantityImpl(ItemSellin itemSellin, ItemSpecificNameImpl itemSpecificName, ItemQuantity itemQuantity) {
+
+	public CalculateQuantityImpl(ItemSellin itemSellin, ItemSpecificName itemSpecificName, ItemQuantity itemQuantity) {
 		this.itemSellin = itemSellin;
 		this.itemSpecificName = itemSpecificName;
 		this.itemQuantity = itemQuantity;
 	}
 
 	@Override
-	public void itemQuantityLess50(Item item) {
+	public void itemQuantityLess50(Item item, String itemName, int compareNumber, int compareVal) {
 
 		if (itemQuantity.hasQuantityLessThan50(item)) {
 			itemQuantity.increaseQuantity(item);
 
-			if (itemSpecificName.isSpecficItemNameMatchWithGivenName(item, ApplicationConstant.ITEM_NAME_VAL)) {
+			if (itemSpecificName.isSpecficItemNameMatchWithGivenName(item, itemName)) {
 
-				itemSellInLessThanNumberAndQuantityLess50(item, 11);
-				itemSellInLessThanNumberAndQuantityLess50(item, 7);
+				itemSellInLessThanNumberAndQuantityLess50(item, compareNumber);
+				itemSellInLessThanNumberAndQuantityLess50(item, compareVal);
 			}
 		}
 	}
-	
+
 	@Override
-	public void itemNameNotMatchThanDecreaseQuantity(Item item) {
+	public void itemNameNotMatchThanDecreaseQuantity(Item item, String givenItemName, String itemName) {
 
-		if (itemSpecificName.isSpecficItemNameNotMatchWithGivenName(item, ApplicationConstant.ITEM_NAME_VAL)) {
+		if (itemSpecificName.isSpecficItemNameNotMatchWithGivenName(item, givenItemName)) {
 
-			quantityPositiveAndItemNameNotMatchDecreaseQuantity(item, ApplicationConstant.ITEM_NAME);
+			quantityPositiveAndItemNameNotMatchDecreaseQuantity(item, itemName);
 		} else {
-			itemQuantity.decreaseQuantity(item);
-
+			item.quality = 0;
 		}
 	}
-    
-	@Override
-	public void quantityPositiveAndItemNameNotMatchDecreaseQuantity(Item item, String name) {
 
-		if (itemQuantity.hasPositiveQuantity(item) && itemSpecificName.isSpecficItemNameNotMatchWithGivenName(item, name)) {
+	@Override
+	public void quantityPositiveAndItemNameNotMatchDecreaseQuantity(Item item, String givenItemName) {
+
+		if (itemQuantity.hasPositiveQuantity(item)
+				&& itemSpecificName.isSpecficItemNameNotMatchWithGivenName(item, givenItemName)) {
 			itemQuantity.decreaseQuantity(item);
 		}
 	}

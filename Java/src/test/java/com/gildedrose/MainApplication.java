@@ -1,8 +1,11 @@
 package com.gildedrose;
 
 import com.gildedrose.model.Item;
+import com.gildedrose.service.CalculateQuantity;
+import com.gildedrose.service.CalculateSellin;
 import com.gildedrose.service.ItemQuantity;
 import com.gildedrose.service.ItemSellin;
+import com.gildedrose.service.ItemSpecificName;
 import com.gildedrose.service.impl.CalculateQuantityImpl;
 import com.gildedrose.service.impl.CalculateSellinImpl;
 import com.gildedrose.service.impl.GildedRoseService;
@@ -26,15 +29,17 @@ public class MainApplication {
 
 		GildedRose app = new GildedRose(items);
 
-		ItemSpecificNameImpl itemSpecificName = new ItemSpecificNameImpl();
+		ItemSpecificName itemSpecificName = new ItemSpecificNameImpl();
 		ItemQuantity itemQuantity = new ItemQuantity();
 		ItemSellin itemSellin = new ItemSellin();
 
-		CalculateQuantityImpl calculateQuantity = new CalculateQuantityImpl(itemSellin, itemSpecificName, itemQuantity);
-		CalculateSellinImpl calculateSellin = new CalculateSellinImpl(itemSellin, itemSpecificName, itemQuantity,
+		CalculateQuantity calculateQuantity = new CalculateQuantityImpl(itemSellin, itemSpecificName, itemQuantity);
+		CalculateSellin calculateSellin = new CalculateSellinImpl(itemSellin, itemSpecificName, itemQuantity,
 				calculateQuantity);
-		GildedRoseService gildedRoseService = new GildedRoseService(items, itemSellin, itemSpecificName,
-				calculateQuantity, calculateSellin);
+		
+		  GildedRoseService gildedRoseService = new GildedRoseService(items,
+		  itemSellin, itemSpecificName, calculateQuantity, calculateSellin);
+		 
 
 		int days = 2;
 		if (args.length > 0) {
