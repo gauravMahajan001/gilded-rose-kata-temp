@@ -42,4 +42,22 @@ class ItemQuantityTest {
 		itemQuantity.decreaseQuantity(item);
 		assertEquals(expectedQuantity, item.quality);
 	}
+	
+	@DisplayName("should return true when quantity less than 50")
+	@Test
+	void testQuantityLessThan50() {
+		
+		Item item = new Item("Test", 2, 10);
+		Boolean result = itemQuantity.hasQuantityLessThan50(item);
+		 assertEquals(Boolean.TRUE, result);
+	}
+	
+	@DisplayName("should return false when quantity greater than 50")
+	@Test
+	void testQuantityGreaterThan50() {
+		
+		Item item = new Item("Test", 2, 50);
+		Boolean result = itemQuantity.hasQuantityLessThan50(item);
+		 assertEquals(Boolean.FALSE, result);
+	}
 }
