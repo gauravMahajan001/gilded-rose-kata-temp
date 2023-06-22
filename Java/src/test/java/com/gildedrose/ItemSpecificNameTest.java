@@ -14,13 +14,36 @@ class ItemSpecificNameTest {
 	
 	@DisplayName("should check Item name not match")
 	@Test
-	void testIsSpecficItemNamesNotMatch() {
+	void testSpecficItemNamesNotMatch() {
 		Item item = new Item("Test", 2, 2);
-		String ItemNameNotMatch = "Age";
-		String ItemNameValNotmatch = "Temp";
+		String itemNameNotMatch = "Age";
+		String itemNameValNotmatch = "Temp";
 		
-		Boolean result = itemSpecificNameImpl.isSpecficItemNamesNotMatch(item, ItemNameNotMatch, ItemNameValNotmatch);
+		Boolean result = itemSpecificNameImpl.isSpecficItemNamesNotMatch(item, itemNameNotMatch, itemNameValNotmatch);
 		assertEquals(Boolean.TRUE, result);
 	}
+	
+	@DisplayName("should return true when item name not matched")
+	@Test
+	void testSpecficItemNameNotMatchWithGivenName() {
+		Item item = new Item("Test", 2, 2);
+		String itemNameNotMatch = "Age";
+		
+		Boolean result = itemSpecificNameImpl.isSpecficItemNameNotMatchWithGivenName(item, itemNameNotMatch);
+		assertEquals(Boolean.TRUE, result);
+		
+	}
+	
+	@DisplayName("should return false when item name  matched")
+	@Test
+	void testSpecficItemNameMatchWithGivenNameThenReturnFalse() {
+		Item item = new Item("Test", 2, 2);
+		String itemNameMatch = "Test";
+		
+		Boolean result = itemSpecificNameImpl.isSpecficItemNameNotMatchWithGivenName(item, itemNameMatch);
+		assertEquals(Boolean.FALSE, result);
+		
+	}
+	
 
 }
