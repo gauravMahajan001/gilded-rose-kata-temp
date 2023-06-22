@@ -1,12 +1,12 @@
 package com.gildedrose;
 
 import com.gildedrose.model.Item;
-import com.gildedrose.service.CalculateQuantity;
-import com.gildedrose.service.CalculateSellin;
-import com.gildedrose.service.GildedRoseService;
 import com.gildedrose.service.ItemQuantity;
 import com.gildedrose.service.ItemSellin;
-import com.gildedrose.service.ItemSpecificName;
+import com.gildedrose.service.impl.CalculateQuantityImpl;
+import com.gildedrose.service.impl.CalculateSellinImpl;
+import com.gildedrose.service.impl.GildedRoseService;
+import com.gildedrose.service.impl.ItemSpecificNameImpl;
 
 public class MainApplication {
 
@@ -26,12 +26,12 @@ public class MainApplication {
 
 		GildedRose app = new GildedRose(items);
 
-		ItemSpecificName itemSpecificName = new ItemSpecificName();
+		ItemSpecificNameImpl itemSpecificName = new ItemSpecificNameImpl();
 		ItemQuantity itemQuantity = new ItemQuantity();
 		ItemSellin itemSellin = new ItemSellin();
 
-		CalculateQuantity calculateQuantity = new CalculateQuantity(itemSellin, itemSpecificName, itemQuantity);
-		CalculateSellin calculateSellin = new CalculateSellin(itemSellin, itemSpecificName, itemQuantity,
+		CalculateQuantityImpl calculateQuantity = new CalculateQuantityImpl(itemSellin, itemSpecificName, itemQuantity);
+		CalculateSellinImpl calculateSellin = new CalculateSellinImpl(itemSellin, itemSpecificName, itemQuantity,
 				calculateQuantity);
 		GildedRoseService gildedRoseService = new GildedRoseService(items, itemSellin, itemSpecificName,
 				calculateQuantity, calculateSellin);
