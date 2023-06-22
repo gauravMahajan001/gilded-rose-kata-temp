@@ -71,4 +71,5 @@ class ItemQuantityTest {
 		assertEquals(expectedQuantity, item.quality);
 		
 	}
+	
 }
