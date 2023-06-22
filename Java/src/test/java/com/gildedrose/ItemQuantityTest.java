@@ -31,4 +31,16 @@ class ItemQuantityTest {
 		Boolean result = itemQuantity.hasPositiveQuantity(item);
         assertEquals(Boolean.FALSE, result);
 	}
+	
+	@DisplayName("should decrease quantity")
+	@Test
+	void testDecreaseQuantity() {
+		
+		Item item = new Item("Test", 2, 10);
+		int expectedQuantity = 9;
+		
+		itemQuantity.decreaseQuantity(item);
+		assertEquals(expectedQuantity, item.quality);
+		
+	}
 }
