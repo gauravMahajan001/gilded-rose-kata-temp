@@ -16,6 +16,7 @@ import com.gildedrose.service.CalculateQuantity;
 import com.gildedrose.service.ItemQuantity;
 import com.gildedrose.service.ItemSellin;
 import com.gildedrose.service.ItemSpecificName;
+import com.gildedrose.service.impl.CalculateQuantityImpl;
 
 @ExtendWith(MockitoExtension.class)
 class CalculateQuantityTest {
@@ -28,17 +29,17 @@ class CalculateQuantityTest {
 	private ItemQuantity itemQuantity;
 	
 	@InjectMocks
-	private CalculateQuantity calculateQuantity;
+	private CalculateQuantityImpl calculateQuantityImpl;
 
 	@DisplayName("should increase quantity but not match specific ite name")
 	@Test
 	void testQuantityIncreaseItemNameNotMatch() {
 		
-		int expectedQuantity = 45;
+		int expectedQuantity = 46;
 		Item item = new Item("test", 5, 45);
-		doReturn(Boolean.FALSE).when(itemSpecificName).isSpecficItemNameMatchWithGivenName(item, "Backstage passes to a TAFKAL80ETC concert");
+		doReturn(Boolean.FALSE).when(itemSpecificName).isSpecficItemNameMatchWithGivenName(item, "test");
 		
-		//calculateQuantity.itemQuantityLess50(item);
+		calculateQuantityImpl.itemQuantityLess50(item,"test",2,4);
       
 		assertEquals(expectedQuantity, item.quality);
 	}

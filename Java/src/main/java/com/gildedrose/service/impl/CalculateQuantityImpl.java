@@ -19,15 +19,15 @@ public class CalculateQuantityImpl implements CalculateQuantity {
 	}
 
 	@Override
-	public void itemQuantityLess50(Item item, String itemName, int compareNumber, int compareVal) {
+	public void itemQuantityLess50(Item item, String itemName, int days, int daysVal) {
 
 		if (itemQuantity.hasQuantityLessThan50(item)) {
 			itemQuantity.increaseQuantity(item);
 
 			if (itemSpecificName.isSpecficItemNameMatchWithGivenName(item, itemName)) {
 
-				itemSellInLessThanNumberAndQuantityLess50(item, compareNumber);
-				itemSellInLessThanNumberAndQuantityLess50(item, compareVal);
+				itemSellInLessThanGivenDaysAndQuantityLess50(item, days);
+				itemSellInLessThanGivenDaysAndQuantityLess50(item, daysVal);
 			}
 		}
 	}
@@ -52,8 +52,8 @@ public class CalculateQuantityImpl implements CalculateQuantity {
 		}
 	}
 
-	private void itemSellInLessThanNumberAndQuantityLess50(Item item, int number) {
-		if (itemSellin.isItemSellInLessThanGivenNumber(item, number) && itemQuantity.hasQuantityLessThan50(item)) {
+	private void itemSellInLessThanGivenDaysAndQuantityLess50(Item item, int givenDays) {
+		if (itemSellin.isItemSellInLessThanGivenNumber(item, givenDays) && itemQuantity.hasQuantityLessThan50(item)) {
 
 			itemQuantity.increaseQuantity(item);
 		}

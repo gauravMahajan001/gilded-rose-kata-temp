@@ -28,8 +28,8 @@ public class GildedRoseService {
 	}
 
 	public void updateQuality() {
-		int compareNumber = 11;
-		int compareVal = 7;
+		int days = 11;
+		int daysVal = 7;
 
 		Arrays.stream(items).forEach(item -> {
 
@@ -40,8 +40,8 @@ public class GildedRoseService {
 						ApplicationConstant.ITEM_NAME);
 			} else {
 
-				calculateQuantity.itemQuantityLess50(item, ApplicationConstant.ITEM_NAME_VAL, compareNumber,
-						compareVal);
+				calculateQuantity.itemQuantityLess50(item, ApplicationConstant.ITEM_NAME_VAL, days,
+						daysVal);
 			}
 
 			if (itemSpecificName.isSpecficItemNameNotMatchWithGivenName(item, ApplicationConstant.ITEM_NAME)) {
