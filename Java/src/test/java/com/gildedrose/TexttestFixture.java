@@ -22,7 +22,11 @@ public class TexttestFixture {
 
         GildedRose app = new GildedRose(items);
         GildedRoseTemp app1 = new GildedRoseTemp(items);
-        int days = 2;
+         
+        Quantity quantity = new Quantity();
+        SellIn sellIn = new SellIn();
+        TempPzzzle app3 = new TempPzzzle(items, quantity, sellIn);
+        int days = 5;
         if (args.length > 0) {
             days = Integer.parseInt(args[0]) + 1;
         }
@@ -34,7 +38,7 @@ public class TexttestFixture {
                 System.out.println(item);
             }
             System.out.println();
-            app1.updateQuality();
+            app3.updateQuality();
         }
     }
 
